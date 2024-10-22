@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animes - Página Inicial</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        #movable {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        #textToToggle {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>Bem-vindo ao Mundo dos Animes!</h1>
+        <nav>
+            <ul class="nav justify-content-center">
+                <li class="nav-item"><a class="nav-link text-white" href="mudarCor.html">Mudar Cor de Fundo</a></li>
+                <li class="nav-item"><a class="nav-link text-white" href="contadorCliques.html">Contador de Cliques</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container text-center my-4">
+        <section>
+            <h2>O que são Animes?</h2>
+            <p>Os animes são séries de animação japonesas que abordam uma variedade de temas e gêneros. Desde ação e aventura até romance e comédia, há algo para todos os gostos!</p>
+            <img src="https://uploads.jovemnerd.com.br/wp-content/uploads/2022/12/animes_mais_aguardados_do_ano__2o6g5y62m.jpg?ims=filters:quality(75)" alt="Imagem de Anime" class="img-fluid rounded">
+        </section>
+        <section id="mudarTextoSection">
+            <h2>Mudar Texto</h2>
+            <h3 id="titulo">Texto Original</h3>
+            <button class="btn btn-primary" onclick="mudarTexto()">Clique para mudar o texto</button>
+        </section>
+        <section id="mostrarEsconderSection">
+            <h2>Mostrar e Esconder Texto</h2>
+            <button id="toggleTextBtn" class="btn btn-secondary">Esconder Texto</button>
+            <p id="textToToggle">Este é o texto que será mostrado ou escondido.</p>
+        </section>
+        <section id="moverElementoSection">
+            <h2>Mover Elemento pela Tela</h2>
+            <p>Use as setas do teclado para mover o quadrado.</p>
+            <div id="movable"></div>
+        </section>
+    </main>
+    <footer class="text-center">
+        <p>&copy; 2024 Mundo dos Animes. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        function mudarTexto() {
+            fetch('texto.txt')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('titulo').innerText = data;
+                })
+                .catch(error => console.error('Erro ao carregar o arquivo:', error));
+        }
+
+        const textToToggle = document.getElementById('textToToggle');
+        const toggleTextBtn = document.getElementById('toggleTextBtn');
+
+        toggleTextBtn.addEventListener('click', function() {
+            if (textToToggle.style.display === 'none') {
+                textToToggle.style.display = 'block';
+                toggleTextBtn.textContent = 'Esconder Texto';
+            } else {
+                textToToggle.style.display = 'none';
+                toggleTextBtn.textContent = 'Mostrar Texto';
+            }
+        });
+
+        const movable = document.getElementById('movable');
+        let topPosition = 200;
+        let leftPosition = window.innerWidth / 2 - 25; 
+
+        document.addEventListener('keydown', function(event) {
+            const step = 10;
+            switch(event.key) {
+                case 'ArrowUp':
+                    topPosition -= step;
+                    break;
+                case 'ArrowDown':
+                    topPosition += step;
+                    break;
+                case 'ArrowLeft':
+                    leftPosition -= step;
+                    break;
+                case 'ArrowRight':
+                    leftPosition += step;
+                    break;
+            }
+            movable.style.top = topPosition + 'px';
+            movable.style.left = leftPosition + 'px';
+        });
+    </script>
+</body>
+</html>

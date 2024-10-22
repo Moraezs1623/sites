@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mudar Cor de Fundo - Animes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="bg-primary text-white text-center py-4">
+        <h1>Mudar Cor de Fundo</h1>
+        <nav>
+            <a class="text-white" href="index.html">Voltar para a Home</a>
+        </nav>
+    </header>
+    <main class="container text-center my-4">
+        <p>Clique no botão abaixo para mudar a cor de fundo da página!</p>
+        <button id="changeColorBtn" class="btn btn-success">Mudar Cor de Fundo</button>
+       
+    </main>
+    <footer class="text-center">
+        <p>&copy; 2024 Mundo dos Animes. Todos os direitos reservados.</p>
+    </footer>
+    <script>
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        document.getElementById('changeColorBtn').addEventListener('click', function() {
+            document.body.style.backgroundColor = getRandomColor();
+        });
+    </script>
+</body>
+</html>
